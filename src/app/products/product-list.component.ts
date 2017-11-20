@@ -7,9 +7,17 @@ import { IProduct } from "./product";
   styleUrls: ['./product-list.component.css']  
 })
 export class ProductListComponent implements OnInit{
-  pageTitle: string = "This is the inventory of magical objects";
+  pageTitle: string = 'This is the inventory of magical objects';
   showImages: boolean = false;
-  listFilter: string = 'rake';
+  _listFilter: string;
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProducts = this._listFilter ? this.performFilter(this.listFilter) : this.products;
+  }
+  filteredProducts: IProduct[];
   products: IProduct[] = [{
         "productId": 1,
         "productName": "Leaf Rake",
@@ -41,11 +49,22 @@ export class ProductListComponent implements OnInit{
         "imageUrl": "http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png"
     }];
 
+    constructor() {
+      this.filteredProducts = this.products;
+      this.listFilter = 'rake';
+    }
+
     toggleImages(): void {
       this.showImages = !this.showImages;
     }
 
     ngOnInit(): void {
       //window.alert('yep, that loaded, boysh');
+    }
+
+    performFilter(filterBy: string) : IProduct[] {
+      filterBy = filterBy.toLocaleLowerCase();
+      return this.products.filter((product: IProduct) => 
+        product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
     }
 }
