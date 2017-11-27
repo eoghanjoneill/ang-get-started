@@ -3,6 +3,7 @@
     {{pageTitle}}
   </div>
   <div class='panel-body'>
+    <p [class]='infoState' (click)='onClear()'>{{infoMessage}}</p>
     <div class='row'>
       <div class='col-md-2'>Filter by:</div>
       <div class='col-md-4'>
@@ -43,7 +44,10 @@
             <td>{{product.productCode | lowercase | convertToSpaces: '-'}}</td>
             <td>{{product.releaseDate}}</td>
             <td>{{product.price | currency:'GBP':true:'1.2-2'}}</td>
-            <td>{{product.starRating}}</td>
+            <td>
+              <inv-star [rating]='product.starRating' (ratingClicked)='onNotify($event)'>
+              </inv-star>
+            </td>
           </tr>
         </tbody>
       </table>

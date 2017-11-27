@@ -1,6 +1,10 @@
+.crop, .faintStarBackground {
+  position: absolute;
+}
+
 .crop {
-    overflow: hidden;
+  overflow: hidden;
 }
 div {
-    cursor: pointer;
+  cursor: pointer;
 }

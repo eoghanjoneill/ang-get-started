@@ -6,9 +6,12 @@ import { IProduct } from "./product";
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']  
 })
-export class ProductListComponent implements OnInit{
+export class ProductListComponent implements OnInit {
   pageTitle: string = 'This is the inventory of magical objects';
   showImages: boolean = false;
+  infoState: string = '.hidden';
+  infoMessage: string = '';
+
   _listFilter: string;
   get listFilter(): string {
     return this._listFilter;
@@ -17,6 +20,7 @@ export class ProductListComponent implements OnInit{
     this._listFilter = value;
     this.filteredProducts = this._listFilter ? this.performFilter(this.listFilter) : this.products;
   }
+
   filteredProducts: IProduct[];
   products: IProduct[] = [{
         "productId": 1,
@@ -50,8 +54,7 @@ export class ProductListComponent implements OnInit{
     }];
 
     constructor() {
-      this.filteredProducts = this.products;
-      this.listFilter = 'rake';
+      this.filteredProducts = this.products;      
     }
 
     toggleImages(): void {
@@ -66,5 +69,15 @@ export class ProductListComponent implements OnInit{
       filterBy = filterBy.toLocaleLowerCase();
       return this.products.filter((product: IProduct) => 
         product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+    }
+
+    onNotify(message: string): void {
+      this.infoMessage = message;
+      this.infoState = 'bg-info';
+    }
+
+    onClear(): void {
+      this.infoState = '.hidden';
+      this.infoMessage = '';
     }
 }
