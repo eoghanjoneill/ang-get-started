@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ProductService } from './products/product.service';
 
 @Component({
   selector: 'inv-root',
@@ -6,7 +7,8 @@ import { Component } from '@angular/core';
   <h1>{{pageTitle}}</h1>
   <div>my first component</div>
   `,
-  templateUrl: './app.component.html'
+  templateUrl: './app.component.html',
+  providers: [ProductService]
 })
 export class AppComponent {
   pageTitle: string = 'Eoghan\'s inventory';
