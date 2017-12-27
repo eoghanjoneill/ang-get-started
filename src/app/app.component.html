@@ -1,7 +1,15 @@
-<!--The whole content below can be removed with the new code.-->
 <header>
-  <h1>
-    Welcome to {{pageTitle}}!
-  </h1>
+  <nav class='navbar navbar-default'>
+    <div class='container-fluid'>
+      <a class='navbar-brand'>{{pageTitle}}</a>
+      <ul class='nav navbar-nav'>
+        <li><a [routerLink]="['/welcome']">Home</a></li>
+        <li><a [routerLink]="['/products']">Product List</a></li>
+        <li><a [routerLink]="['/invalid']">Invalid Route</a></li>
+      </ul>
+    </div>
+  </nav>
 </header>
-<inv-prod-list></inv-prod-list>
+<div>
+  <router-outlet></router-outlet>
+</div>
