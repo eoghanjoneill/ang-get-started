@@ -30,7 +30,7 @@ export class ProductService {
         return new Observable(observer => {
           this.getProducts().subscribe((products) => {
             let prod = products.find(p => p.productId === id);
-            prod.productName += ', but the good kind';
+            prod.productName += ', but the good kind';//just showing how we could intercept the values from the observable
             observer.next(prod);
           });
         });
